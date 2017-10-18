@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
     private String sFloor, sTouchTime = null;
     private String sToken, sUrl, toUrl = null;
     private String sRestart = "N";
-    private WebViewSettingKt WebViewSettingkt;
     private WebViewInterface mWebViewInterface;
     private SwipeRefreshLayout mSwipeRefresh; //당겨서 새로고침
     private Context mContext;
