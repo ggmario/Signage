@@ -1,0 +1,58 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
+    defaultConfig {
+        applicationId "com.eluo.signage"
+        minSdkVersion 21
+        targetSdkVersion 21
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:26.0.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.0'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.0'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+
+    compile 'com.jakewharton:butterknife:8.4.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+    compile 'com.google.firebase:firebase-core:11.0.1'	        //분석
+    //compile 'com.google.firebase:firebase-database:11.0.1'	//실시간 데이터베이스
+    //compile 'com.google.firebase:firebase-storage:11.0.1'	        //저장
+    compile 'com.google.firebase:firebase-crash:11.0.1'	        //오류 보고
+    //compile 'com.google.firebase:firebase-auth:11.0.1'	        //인증
+    //compile 'com.google.firebase:firebase-config:11.0.1'	        //원격 구성
+    //compile 'com.google.firebase:firebase-invites:11.0.1'         //초대 및 동적 링크
+    //compile 'com.google.firebase:firebase-ads:11.0.1'	        //광고
+    //compile 'com.google.firebase:firebase-appindexing:11.0.1'	//앱 색인
+    compile 'com.google.firebase:firebase-messaging:11.0.1'	//클라우드 메시지 및 알림
+    compile 'com.firebase:firebase-jobdispatcher:0.5.2'
+
+
+}
+
+android {
+    useLibrary 'org.apache.http.legacy'  //아파치 http 모듈 6.0부터 지원 하지 않아 넣었음
+}
+//PUSH 목적 추가
+apply plugin: 'com.google.gms.google-services'
+
+repositories {
+    mavenCentral()
+}

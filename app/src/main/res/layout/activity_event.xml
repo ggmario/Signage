@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--xmlns:tools="http://schemas.android.com/tools"-->
+<!--android:id="@+id/activity_main"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="match_parent"-->
+<!--tools:context="com.eluo.signage.MainActivity">-->
+
+<!--<WebView-->
+<!--android:id="@+id/webView"-->
+<!--android:layout_width="fill_parent"-->
+<!--android:layout_height="fill_parent"-->
+<!--android:layout_alignParentTop="true"-->
+<!--/>-->
+<!--</RelativeLayout>-->
+
+<android.support.v4.widget.SwipeRefreshLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/activity_event"
+    android:padding="0dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <WebView
+        android:id="@+id/webViewEvent"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true">
+    </WebView>
+
+</android.support.v4.widget.SwipeRefreshLayout>

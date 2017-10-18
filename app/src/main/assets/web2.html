@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+</head>
+<body>
+<li><a href="tel:02-333-7501">tel 전화</a></li>
+<li><a href="javascript:callPhone()">전화</a></li>
+<!--<li><a href="http://www.naver.com">웹뷰</a></li>-->
+<li onclick="callPhone();">Web javascript Tel</li>
+<li onclick="callBrowser();">Web javascript Browser</li>
+<li onclick="callMg();">메시지 찍어보기</li>
+<li onclick="callMg2();">메시지 찍어보기2</li>
+<li onclick="callMg3();">메시지 찍어보기4443</li>
+<li onclick="callBrowser();">callBrowser</li>
+<p id="textMessageFromApp">
+</p>
+</ul>
+</body>
+</html>
+<script type="text/javascript">
+function callPhone(){
+	window.EluoApp.callCenterDial( "023337501" );
+}
+
+function callMg(){
+	window.EluoApp.toastShort( "023337501" );
+}
+
+function callMg2(){
+	window.EluoApp.webData( "웹 데이터" );
+}
+
+function callMg3(){
+	window.EluoApp.webUrl( "http://fs.eluocnc.com:8282/html/download/20160615_Manual_Reflects_Kiosk_1.pdf" );
+}
+
+function callBrowser(){
+    window.EluoApp.callOutBrowser('http://www.naver.com');
+}
+
+
+function deviceUuid(arg){
+  document.getElementById('textMessageFromApp').innerHTML = arg;
+}
+</script>

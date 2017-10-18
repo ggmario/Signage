@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "552474195187",
+    "firebase_url": "https://eluo-signage.firebaseio.com",
+    "project_id": "eluo-signage",
+    "storage_bucket": "eluo-signage.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:552474195187:android:4b3f8ba26413a1a0",
+        "android_client_info": {
+          "package_name": "com.eluo.signage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "552474195187-onsqev3lovqgjsc9outbl2brsnr4dmuo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.eluo.signage",
+            "certificate_hash": "13cd7e4c1fba53b3a8d59e363bd51b171b848d13"
+          }
+        },
+        {
+          "client_id": "552474195187-mqn12sd5bbbhnh5vvm80l9r85ktaobmo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCj2ux0oDvyVEHBd-rmj2oKe0lAoLQCx78"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "552474195187-mqn12sd5bbbhnh5vvm80l9r85ktaobmo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
