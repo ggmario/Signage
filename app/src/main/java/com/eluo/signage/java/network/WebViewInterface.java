@@ -60,16 +60,12 @@ public class WebViewInterface {
         });
     }
 
-
-
     @JavascriptInterface
     public void callCenterDial(final String callDiaNum) { // must be final
-        System.out.println("1333333333333333333333333333");
         // 전화
         handler.post(new Runnable() {
             @Override
             public void run() {
-                System.out.println("1111111111111111111112222");
                // if(MainActivity.instance != null)
                     //MainActivity.instance.callCenterDial(callDiaNum);
             }
