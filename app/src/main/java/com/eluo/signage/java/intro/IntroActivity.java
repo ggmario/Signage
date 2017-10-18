@@ -340,7 +340,7 @@ public class IntroActivity extends Activity {
     private  void  DialogSelectOptionTime(){
         final String itemsTime[] = { "5", "10", "15","20","25","30","없음" };
         AlertDialog.Builder ab = new AlertDialog.Builder(IntroActivity.this);
-        ab.setTitle("메인 이동 대기 시간 선택");
+        ab.setTitle(R.string.D_main);
         ab.setSingleChoiceItems(itemsTime, 0,
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
