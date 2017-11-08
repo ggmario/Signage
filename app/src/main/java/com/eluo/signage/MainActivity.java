@@ -1,11 +1,14 @@
 package com.eluo.signage;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,6 +29,8 @@ import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import com.eluo.signage.java.network.WebViewInterface;
+import com.eluo.signage.java.service.NetworkReceiver;
+import com.eluo.signage.kotlin.network.NetworkUtil;
 import com.eluo.signage.kotlin.utils.BackPressCloseHandler;
 import com.eluo.signage.kotlin.utils.Date;
 import com.eluo.signage.kotlin.utils.ThreadPolicy;
@@ -38,7 +43,8 @@ import java.util.TimerTask;
 public class MainActivity extends AppCompatActivity {
     private WebView mWebView = null;
     public static MainActivity instance = null;
-
+    public static String network = "";
+    private ProgressDialog mProgressDialog;
     private int iNowTime = 0;
     private int iTouchTime = 0;
     private String sEventUrl = null;
@@ -64,6 +70,12 @@ public class MainActivity extends AppCompatActivity {
         instance = this;
         sRestart = getIntent().getStringExtra("sRestart");
 
+
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        NetworkReceiver receiver = new NetworkReceiver();
+        registerReceiver(receiver,filter);
+
+
         setFullScreen();    //소프트 키 숨김
 
         new ThreadPolicy();
@@ -76,39 +88,39 @@ public class MainActivity extends AppCompatActivity {
         } else {
             iTouchTime = Integer.parseInt(sTouchTime);
         }
+        if(NetworkUtil.INSTANCE.isNetworkConnected(MainActivity.instance)==true){
+            mWebView = (WebView) findViewById(R.id.webView);       //activity_main.xml에서 id를  가지고 사용
+            mWebViewInterface = new WebViewInterface(MainActivity.this, mWebView); //JavascriptInterface 객체화
+            mWebView.addJavascriptInterface(mWebViewInterface, "EluoApp"); //웹뷰에 JavascriptInterface를 연결
+            mWebView.setWebViewClient(new WishWebViewClient());     //웹뷰 Alert창 출력
+            mWebView.setWebChromeClient(new WebChromeClient());     //크롭 Alert창 출력
+            mWebView.getSettings().setJavaScriptEnabled(true);      // 웹뷰에서 자바 스크립트 사용
+            mWebView.getSettings().setPluginState(WebSettings.PluginState.ON_DEMAND);//플러그인 사용할수 있도록 설정
+            mWebView.setScrollBarStyle(mWebView.SCROLLBARS_OUTSIDE_OVERLAY); //여백제거
 
-        mWebView = (WebView) findViewById(R.id.webView);       //activity_main.xml에서 id를  가지고 사용
-        mWebViewInterface = new WebViewInterface(MainActivity.this, mWebView); //JavascriptInterface 객체화
-        mWebView.addJavascriptInterface(mWebViewInterface, "EluoApp"); //웹뷰에 JavascriptInterface를 연결
-        mWebView.setWebViewClient(new WishWebViewClient());     //웹뷰 Alert창 출력
-        mWebView.setWebChromeClient(new WebChromeClient());     //크롭 Alert창 출력
-        mWebView.getSettings().setJavaScriptEnabled(true);      // 웹뷰에서 자바 스크립트 사용
-        mWebView.getSettings().setPluginState(WebSettings.PluginState.ON_DEMAND);//플러그인 사용할수 있도록 설정
-        mWebView.setScrollBarStyle(mWebView.SCROLLBARS_OUTSIDE_OVERLAY); //여백제거
+            if (18 < Build.VERSION.SDK_INT) {//캐시 사용안함
+                mWebView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+            }
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH) {   // 웹뷰에서 시스템 텍스트 크기를 무시하도록 설정
+                mWebView.getSettings().setTextZoom(100);
+            }
+            if (sEventUrl != null && !sEventUrl.equals("")) {
+                mWebView.loadUrl(sUrl);
+            } else {
+                mWebView.loadUrl(WebViewSettingKt.formatUrl() + sFloor);            // 웹뷰에서 불러올 URL 입력
+                sUrl = WebViewSettingKt.formatUrl() + sFloor;             //인트로 이후 처음 열린 페이지
+            }
+            mWebView.setWebViewClient(new WishWebViewClient());
+            iNowTime = Integer.parseInt(Date.INSTANCE.sDate());  //처음 메인 페이지 호출 시간
 
-        if (18 < Build.VERSION.SDK_INT) {//캐시 사용안함
-            mWebView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
-        }
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH) {   // 웹뷰에서 시스템 텍스트 크기를 무시하도록 설정
-            mWebView.getSettings().setTextZoom(100);
-        }
-        if (sEventUrl != null && !sEventUrl.equals("")) {
-            mWebView.loadUrl(sUrl);
-        } else {
-            mWebView.loadUrl(WebViewSettingKt.formatUrl() + sFloor);            // 웹뷰에서 불러올 URL 입력
-            sUrl = WebViewSettingKt.formatUrl() + sFloor;             //인트로 이후 처음 열린 페이지
-        }
-        mWebView.setWebViewClient(new WishWebViewClient());
-        iNowTime = Integer.parseInt(Date.INSTANCE.sDate());  //처음 메인 페이지 호출 시간
+            //푸시로 설정값 초기화 되었을때 앱 종료 처리함(재시작 하여 설정값 선택)
+            if (sRestart != null && sRestart.equals("Y")) {
+                sRestart = null;
+                int pid = android.os.Process.myPid();
+                android.os.Process.killProcess(pid);
+            }
 
-        //푸시로 설정값 초기화 되었을때 앱 종료 처리함(재시작 하여 설정값 선택)
-        if (sRestart != null && sRestart.equals("Y")) {
-            sRestart = null;
-            int pid = android.os.Process.myPid();
-            android.os.Process.killProcess(pid);
-        }
-
-        //당겨서 새로 고침
+            //당겨서 새로 고침
 //        mSwipeRefresh = (SwipeRefreshLayout) findViewById(R.id.activity_main);
 //        mSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 //            @Override
@@ -117,50 +129,65 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
-        mWebView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View arg0, MotionEvent arg1) {
-                // TODO Auto-generated method stub
-                Log.d("화면:", "터치");
-                switch (arg1.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        if (sTouchTime.equals("없음")) {
-                            iTouchTime = 480;
-                        } else {
-                            iTouchTime = Integer.parseInt(sTouchTime);
-                        }
-                        //Log.e("shiki", "온클릭");
-                        break;
+            mWebView.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View arg0, MotionEvent arg1) {
+                    // TODO Auto-generated method stub
+                    Log.d("화면:", "터치");
+                    switch (arg1.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            if (sTouchTime.equals("없음")) {
+                                iTouchTime = 480;
+                            } else {
+                                iTouchTime = Integer.parseInt(sTouchTime);
+                            }
+                            //Log.e("shiki", "온클릭");
+                            break;
+                    }
+                    return false;
                 }
-                return false;
-            }
-        });
+            });
 
-        //일정 시간 간격 실행
-        TimerTask adTast = new TimerTask() {
-            public void run() {
-                iNowTime = Integer.parseInt(Date.INSTANCE.sDate());
-                if (toUrl != null) {
-                    if (toUrl != sUrl) {
-                        --iTouchTime;
-                        System.out.println("MainTime:::" + iTouchTime);
-                        if (iTouchTime == 0) {
-                            mWebView.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    //동작
-                                    mWebView.loadUrl(WebViewSettingKt.formatUrl() + sFloor);
-                                    toUrl = sUrl;
-                                }
-                            });
+            //일정 시간 간격 실행
+            TimerTask adTast = new TimerTask() {
+                public void run() {
+                    iNowTime = Integer.parseInt(Date.INSTANCE.sDate());
+                    if (toUrl != null) {
+                        if (toUrl != sUrl) {
+                            --iTouchTime;
+                            System.out.println("MainTime:::" + iTouchTime);
+                            if (iTouchTime == 0) {
+                                mWebView.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        //동작
+                                        mWebView.loadUrl(WebViewSettingKt.formatUrl() + sFloor);
+                                        toUrl = sUrl;
+                                    }
+                                });
+                            }
                         }
                     }
                 }
-            }
-        };
-        Timer timer = new Timer();
-        timer.schedule(adTast, 0, 60000); // 0초후 첫실행, 60초 마다 계속실행
-    }
+            };
+            Timer timer = new Timer();
+            timer.schedule(adTast, 0, 60000); // 0초후 첫실행, 60초 마다 계속실행
+        }else{
+            System.out.println("네트워크 연결 끊어짐!!!!!!!!!!!!!!!!!");
+            Context ctx = this;
+            final AlertDialog.Builder alert = new AlertDialog.Builder(ctx);
+            alert.setTitle("알림");
+            alert.setMessage("네트워크 연결이 끊어 졌습니다.");
+            alert.setPositiveButton("확인",new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog,int whichButton){
+                    finish();
+                    mWebView.reload();
+                }});
+            alert.setCancelable(false); //바탕화면 터치시 종료 방지
+            alert.create();
+            alert.show();
+        }
+   }
 
     private class WishWebViewClient extends WebViewClient {
         //url 주소에 해당하는 웹페이지 로딩
@@ -179,6 +206,8 @@ public class MainActivity extends AppCompatActivity {
             mWebView.loadUrl("javascript:deviceUuid('" + sToken + "')");
             mWebView.loadUrl("javascript:deviceScd('" + sFloor + "')");
         }
+
+
 
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
@@ -236,9 +265,7 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         //super.onBackPressed();
         AlertDialog.Builder alt_bld = new AlertDialog.Builder(this);
-        alt_bld.setMessage(R.string.D_Question).setCancelable(
-                false).setPositiveButton("Yes",
-                new DialogInterface.OnClickListener() {
+        alt_bld.setMessage(R.string.D_Question).setCancelable(false).setPositiveButton("Yes",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // Action for 'Yes' Button
                         MainActivity.instance.finish();
@@ -276,5 +303,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(intent);
     }
+
 }
 
