@@ -205,6 +205,19 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService{
                         });
                         alert.setMessage(ssTitle);
                         alert.show();
+                    }else  if (sType.equals("U")) {//외부 브라우저
+                        // 내용
+                        AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.instance);
+                        alert.setPositiveButton("이동", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(sUrl));
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                            }
+                        });
+                        alert.setMessage(R.string.D_New_Update);
+                        alert.show();
                     }else if(sType.equals("FAC")){
                         String sFloor = "";
                         String sMe = "C";
