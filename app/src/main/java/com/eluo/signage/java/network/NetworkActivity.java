@@ -29,9 +29,17 @@ import com.eluo.signage.kotlin.utils.ThreadPolicy;
 import com.eluo.signage.kotlin.utils.WebViewSettingKt;
 
 /**
- * Created by gogumario on 2017-11-10.
+ * Project	  : Eluo Signage
+ * Program    : Signage
+ * Description	: 엘루오 씨엔시 사이니지 네트워크 액티비티
+ * Environment	: Android Studio 3.0
+ * Notes	    : Developed by
+ *
+ * @(#) NetworkActivity.java
+ * @since 2017-11-10
+ * History	    : [DATE][Programmer][Description]
+ * 		        : [2017-11-10][ggmario@eluocnc.com][CREATE: STATEMENT]
  */
-
 public class NetworkActivity extends AppCompatActivity {
     private WebView mWebView = null;
     public static NetworkActivity instance = null;

@@ -29,7 +29,16 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Created by gogumario on 2017-09-29.
+ * Project	  : Eluo Signage
+ * Program    : Signage
+ * Description	: 엘루오 씨엔시 사이니지 이벤트용 웹뷰
+ * Environment	: Android Studio 3.0
+ * Notes	    : Developed by
+ *
+ * @(#) EventActivity.java
+ * @since 2017-09-29
+ * History	    : [DATE][Programmer][Description]
+ * 		        : [2017-09-29][ggmario@eluocnc.com][CREATE: STATEMENT]
  */
 
 public class EventActivity  extends AppCompatActivity {

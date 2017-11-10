@@ -39,6 +39,19 @@ import com.eluo.signage.kotlin.utils.WebViewSettingKt;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * Project	  : Eluo Signage
+ * Program    : Signage
+ * Description	: 엘루오 씨엔시 사이니지 웹뷰(메인)
+ * Environment	: Android Studio 3.0
+ * Notes	    : Developed by
+ *
+ * @(#) MainActivity.java
+ * @since 2017-09-01
+ * History	    : [DATE][Programmer][Description]
+ * 		        : [2017-09-01][ggmario@eluocnc.com][CREATE: STATEMENT]
+ */
+
 public class MainActivity extends AppCompatActivity {
     private WebView mWebView = null;
     public static MainActivity instance = null;
@@ -173,14 +186,7 @@ public class MainActivity extends AppCompatActivity {
         }else{
             System.out.println("네트워크 연결 끊어짐!!!!!!!!!!!!!!!!!");
         }
-   }
-
-   public static  void restartActivity (Activity act){
-       Intent intent=new Intent();
-       intent.setClass(act, act.getClass());
-       act.finish();
-       act.startActivity(intent);
-   }
+    }
     private class WishWebViewClient extends WebViewClient {
         //url 주소에 해당하는 웹페이지 로딩
         @Override
@@ -293,6 +299,5 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(intent);
     }
-
 }
 

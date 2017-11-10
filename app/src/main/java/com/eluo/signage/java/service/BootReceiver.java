@@ -1,14 +1,22 @@
 package com.eluo.signage.java.service;
 
-/**
- * Created by gogumario on 2017-09-28.
- */
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
 import com.eluo.signage.java.intro.IntroActivity;
+/**
+ * Project	  : Eluo Signage
+ * Program    : Signage
+ * Description	: 엘루오 씨엔시 사이니지 브로드캐스트리시버(자동 앱실행)
+ * Environment	: Android Studio 3.0
+ * Notes	    : Developed by
+ *
+ * @(#) BootReceiver.java
+ * @since 2017-09-28
+ * History	    : [DATE][Programmer][Description]
+ * 		        : [2017-09-28][ggmario@eluocnc.com][CREATE: STATEMENT]
+ */
 
 public class BootReceiver extends BroadcastReceiver {
     // BroadcastReceiver를 상속하여 처리 해줍니다.

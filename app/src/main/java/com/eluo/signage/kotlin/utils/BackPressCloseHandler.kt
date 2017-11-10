@@ -4,7 +4,16 @@ import android.app.Activity
 import android.widget.Toast
 
 /**
- * Created by gogumario on 2017-09-20.
+ * Project	  : Eluo Signage
+ * Program    : Signage
+ * Description	: 엘루오 씨엔시 사이니지 뒤로가기 종료 처리
+ * Environment	: Android Studio 3.0
+ * Notes	    : Developed by
+ *
+ * @(#) BackPressCloseHandler.kt
+ * @since 2017-09-20
+ * History	    : [DATE][Programmer][Description]
+ * 		        : [2017-09-20][ggmario@eluocnc.com][CREATE: STATEMENT]
  */
 class BackPressCloseHandler(private val activity: Activity) {
 

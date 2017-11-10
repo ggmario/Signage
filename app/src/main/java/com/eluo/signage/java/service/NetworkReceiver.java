@@ -9,7 +9,16 @@ import android.util.Log;
 import android.widget.Toast;
 
 /**
- * Created by gogumario on 2017-11-07.
+ * Project	  : Eluo Signage
+ * Program    : Signage
+ * Description	: 엘루오 씨엔시 사이니즈 브로드캐스트리시버(네트워크)
+ * Environment	: Android Studio 3.0
+ * Notes	    : Developed by
+ *
+ * @(#) NetworkReceiver.java
+ * @since 2017-11-07
+ * History	    : [DATE][Programmer][Description]
+ * 		        : [2017-11-07][ggmario@eluocnc.com][CREATE: STATEMENT]
  */
 
 public class NetworkReceiver extends BroadcastReceiver {

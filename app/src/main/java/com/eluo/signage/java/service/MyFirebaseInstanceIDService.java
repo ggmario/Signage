@@ -1,8 +1,5 @@
 package com.eluo.signage.java.service;
 
-/**
- * Created by gogumario on 2017-09-01.
- */
 
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -10,7 +7,18 @@ import android.util.Log;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 
-
+/**
+ * Project	  : Eluo Signage
+ * Program    : Signage
+ * Description	: 엘루오 씨엔시 사이니지 프리퍼런스
+ * Environment	: Android Studio 3.0
+ * Notes	    : Developed by
+ *
+ * @(#) MyFirebaseInstanceIDService.java
+ * @since 2017-09-01
+ * History	    : [DATE][Programmer][Description]
+ * 		        : [2017-09-01][ggmario@eluocnc.com][CREATE: STATEMENT]
+ */
 public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
 
     private static final String TAG = "MyFirebaseIIDService";

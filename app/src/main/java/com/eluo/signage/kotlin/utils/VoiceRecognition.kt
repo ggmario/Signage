@@ -5,11 +5,17 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.speech.RecognizerIntent
 
-
 /**
- * Created by gogumario on 2017-09-11.
- * 음성 인식
- * @since  2017-09-11
+ * Project	  : Eluo Signage
+ * Program    : Signage
+ * Description	: 엘루오 씨엔시 사이니지 음성 인식
+ * Environment	: Android Studio 3.0
+ * Notes	    : Developed by
+ *
+ * @(#) VoiceRecognition.java
+ * @since 2017-09-11
+ * History	    : [DATE][Programmer][Description]
+ * 		        : [2017-09-11][ggmario@eluocnc.com][CREATE: STATEMENT]
  */
 
 class VoiceRecognition(ctx: Context) {

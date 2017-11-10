@@ -1,7 +1,16 @@
 package com.eluo.signage.kotlin.utils
 
 /**
- * Created by gogumario on 2017-08-30.
+ * Project	  : Eluo Signage
+ * Program    : Signage
+ * Description	: 엘루오 씨엔시 사이니지 URL
+ * Environment	: Android Studio 3.0
+ * Notes	    : Developed by
+ *
+ * @(#) WebViewSetting.kt
+ * @since 2017-09-01
+ * History	    : [DATE][Programmer][Description]
+ * 		        : [2017-09-01][ggmario@eluocnc.com][CREATE: STATEMENT]
  */
 
 //url 정보

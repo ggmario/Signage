@@ -1,10 +1,5 @@
 package com.eluo.signage.java.service;
 
-/**
- * Created by gogumario on 2017-09-01.
- */
-
-
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -41,6 +36,16 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService{
      * Called when message is received.
      *
      * @param remoteMessage Object representing the message received from Firebase Cloud Messaging.
+     * Project	  : Eluo Signage
+     * Program    : Signage
+     * Description	: 엘루오 씨엔시 사이니지 푸시 알림
+     * Environment	: Android Studio 3.0
+     * Notes	    : Developed by
+     *
+     * @(#) MyFirebaseMessagingService.java
+     * @since 2017-09-01
+     * History	    : [DATE][Programmer][Description]
+     * 		        : [2017-09-01][ggmario@eluocnc.com][CREATE: STATEMENT]
      */
     // [START receive_message]
     @Override

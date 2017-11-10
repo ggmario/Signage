@@ -9,7 +9,16 @@ import android.widget.Toast;
 import com.eluo.signage.MainActivity;
 
 /**
- * Created by gogumario on 2016-12-18.
+ * Project	  : Eluo Signage
+ * Program    : Signage
+ * Description	: 엘루오 씨엔시 사이니지 웹뷰 인터페이스
+ * Environment	: Android Studio 3.0
+ * Notes	    : Developed by
+ *
+ * @(#) WebViewInterface.java
+ * @since 2017-09-01
+ * History	    : [DATE][Programmer][Description]
+ * 		        : [2017-09-01][ggmario@eluocnc.com][CREATE: STATEMENT]
  */
 
 public class WebViewInterface {

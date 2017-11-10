@@ -31,7 +31,16 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Created by gogumario on 2017-09-01.
+ * Project	  : Eluo Signage
+ * Program    : Signage
+ * Description	: 엘루오 씨엔시 사이니지 인트로
+ * Environment	: Android Studio 3.0
+ * Notes	    : Developed by
+ *
+ * @(#) IntroActivity.java
+ * @since 2017-09-01
+ * History	    : [DATE][Programmer][Description]
+ * 		        : [2017-09-01][ggmario@eluocnc.com][CREATE: STATEMENT]
  */
 
 public class IntroActivity extends Activity {

@@ -4,7 +4,16 @@ import android.content.Context
 import android.net.ConnectivityManager
 
 /**
- * Created by gogumario on 2017-09-01.
+ * Project	  : Eluo Signage
+ * Program    : Signage
+ * Description	: 엘루오 씨엔시 사이니지 네트워크 연결 확인 유틸
+ * Environment	: Android Studio 3.0
+ * Notes	    : Developed by
+ *
+ * @(#) NetworkReceiver.java
+ * @since 2017-09-01
+ * History	    : [DATE][Programmer][Description]
+ * 		        : [2017-09-01][ggmario@eluocnc.com][CREATE: STATEMENT]
  */
 
 object NetworkUtil {
