@@ -30,21 +30,22 @@ public class NetworkReceiver extends BroadcastReceiver {
         if(false == isConnected){
             if(iCount == 0){
                 Intent trIntent = new Intent("android.intent.action.MAIN");
-                trIntent.setClass(context, com.eluo.signage.MainActivity.class);
+                trIntent.setClass(context, com.eluo.signage.java.network.NetworkActivity.class);
                 trIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(trIntent);
                 iCount = 1;
+                Toast.makeText(context, String.format("네트워크 연결이 끊어 졌습니다"),Toast.LENGTH_SHORT).show();
             }
-            Toast.makeText(context, String.format("네트워크 연결이 끊어 졌습니다"),Toast.LENGTH_SHORT).show();
-//            Toast.makeText(context, String.format("%s를 수신했습니다.", isConnected),Toast.LENGTH_SHORT).show();
         }else{
-            iCount = 0;
-            //Toast.makeText(context, String.format("네트워크 연결 되었습니다."),Toast.LENGTH_SHORT).show();
+            if(iCount == 1) {
+                Intent trIntent = new Intent("android.intent.action.MAIN");
+                trIntent.setClass(context, com.eluo.signage.java.network.NetworkActivity.class);
+                trIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(trIntent);
+                iCount = 0;
+                Toast.makeText(context, String.format("네트워크 연결 되었습니다."),Toast.LENGTH_SHORT).show();
+            }
         }
-
-
-
-//        Toast.makeText(context, "네트워크 연결이 변경 되었습니다"     , Toast.LENGTH_LONG);
     }
 
 
