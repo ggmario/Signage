@@ -202,7 +202,7 @@ public class IntroActivity extends Activity {
             } else {
                 sVer = sVersionName;
                 Log.i("버전 체크:", "앱 버전 체크 실패 하였습니다");
-                //FirebaseCrash.report(new Exception("앱 버전 체크 실패 하였습니다"));
+                FirebaseCrash.report(new Exception("앱 버전 체크 실패 하였습니다"));
             }
             if (!sVersionName.equals(sVer)) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -441,6 +441,7 @@ public class IntroActivity extends Activity {
             urlc.connect();
         }catch (Exception e){
             System.out.println("error::::::"+e);
+            FirebaseCrash.report(new Exception("층별 정보가져오기 실패"+e));
             return null;
         }
         try {
