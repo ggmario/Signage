@@ -38,7 +38,6 @@ import com.eluo.signage.kotlin.utils.WebViewSettingKt;
 
 import java.util.Timer;
 import java.util.TimerTask;
-//import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     private WebView mWebView = null;
@@ -70,12 +69,6 @@ public class MainActivity extends AppCompatActivity {
         instance = this;
         sRestart = getIntent().getStringExtra("sRestart");
 
-
-        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-        NetworkReceiver receiver = new NetworkReceiver();
-        registerReceiver(receiver,filter);
-
-
         setFullScreen();    //소프트 키 숨김
 
         new ThreadPolicy();
@@ -89,6 +82,11 @@ public class MainActivity extends AppCompatActivity {
             iTouchTime = Integer.parseInt(sTouchTime);
         }
         if(NetworkUtil.INSTANCE.isNetworkConnected(MainActivity.instance)==true){
+            //BroadcastReceiver 등록
+            IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+            NetworkReceiver receiver = new NetworkReceiver();
+            registerReceiver(receiver,filter);
+
             mWebView = (WebView) findViewById(R.id.webView);       //activity_main.xml에서 id를  가지고 사용
             mWebViewInterface = new WebViewInterface(MainActivity.this, mWebView); //JavascriptInterface 객체화
             mWebView.addJavascriptInterface(mWebViewInterface, "EluoApp"); //웹뷰에 JavascriptInterface를 연결
@@ -174,21 +172,15 @@ public class MainActivity extends AppCompatActivity {
             timer.schedule(adTast, 0, 60000); // 0초후 첫실행, 60초 마다 계속실행
         }else{
             System.out.println("네트워크 연결 끊어짐!!!!!!!!!!!!!!!!!");
-            Context ctx = this;
-            final AlertDialog.Builder alert = new AlertDialog.Builder(ctx);
-            alert.setTitle("알림");
-            alert.setMessage("네트워크 연결이 끊어 졌습니다.");
-            alert.setPositiveButton("확인",new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog,int whichButton){
-                    finish();
-                    mWebView.reload();
-                }});
-            alert.setCancelable(false); //바탕화면 터치시 종료 방지
-            alert.create();
-            alert.show();
         }
    }
 
+   public static  void restartActivity (Activity act){
+       Intent intent=new Intent();
+       intent.setClass(act, act.getClass());
+       act.finish();
+       act.startActivity(intent);
+   }
     private class WishWebViewClient extends WebViewClient {
         //url 주소에 해당하는 웹페이지 로딩
         @Override
@@ -206,8 +198,6 @@ public class MainActivity extends AppCompatActivity {
             mWebView.loadUrl("javascript:deviceUuid('" + sToken + "')");
             mWebView.loadUrl("javascript:deviceScd('" + sFloor + "')");
         }
-
-
 
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
