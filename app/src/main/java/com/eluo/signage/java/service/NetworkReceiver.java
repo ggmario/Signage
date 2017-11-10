@@ -33,7 +33,6 @@ public class NetworkReceiver extends BroadcastReceiver {
         //TODO 네트워크 변환에 따른 이후 로직을 처리한다.
         //ex. noti,activity 호출,service 호출 등등
         Log.d("network Receiver", "network isConnected :  " + isConnected);
-//        intent.getStringExtra("");
 
         boolean sTmp = true;
         if(false == isConnected){
@@ -56,14 +55,4 @@ public class NetworkReceiver extends BroadcastReceiver {
             }
         }
     }
-
-
-
-
-
-
-
-
-
-
 }
