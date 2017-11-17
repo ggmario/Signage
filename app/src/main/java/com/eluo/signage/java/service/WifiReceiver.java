@@ -10,13 +10,21 @@ import android.widget.Toast;
 import com.google.firebase.crash.FirebaseCrash;
 
 /**
- * Created by gogumario on 2017-11-17.
+ * Project	  : Eluo Signage
+ * Program    : Signage
+ * Description	: 엘루오 씨엔시 사이니즈 브로드캐스트리시버(Wifi)
+ * Environment	: Android Studio 3.0
+ * Notes	    : Developed by
+ *
+ * @(#) WifiReceiver.java
+ * @since 2017-11-17
+ * History	    : [DATE][Programmer][Description]
+ * 		        : [2017-11-07][ggmario@eluocnc.com][CREATE: STATEMENT]
  */
 
 public class WifiReceiver extends BroadcastReceiver {
     private int beforeWifiLevel = 0;               // 이전 wifi 수신 레벨
     private static int iCount =0;
-    private static String sCode = "";
     @Override
     public void onReceive(Context context, Intent intent) {
         WifiManager wifiMan = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
