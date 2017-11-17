@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.Uri;
+import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -30,6 +31,7 @@ import android.widget.Toast;
 
 import com.eluo.signage.java.network.WebViewInterface;
 import com.eluo.signage.java.service.NetworkReceiver;
+import com.eluo.signage.java.service.WifiReceiver;
 import com.eluo.signage.kotlin.network.NetworkUtil;
 import com.eluo.signage.kotlin.utils.BackPressCloseHandler;
 import com.eluo.signage.kotlin.utils.Date;
@@ -95,10 +97,15 @@ public class MainActivity extends AppCompatActivity {
             iTouchTime = Integer.parseInt(sTouchTime);
         }
         if(NetworkUtil.INSTANCE.isNetworkConnected(MainActivity.instance)==true){
-            //BroadcastReceiver 등록
+            //네트워크 열결 BroadcastReceiver 등록
             IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
             NetworkReceiver receiver = new NetworkReceiver();
             registerReceiver(receiver,filter);
+
+            //와이파이 수신감도 BroadcastReceiver 등록
+            IntentFilter filter1 = new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
+            WifiReceiver wifiReceiver = new WifiReceiver();
+            registerReceiver(wifiReceiver,filter1);
 
             mWebView = (WebView) findViewById(R.id.webView);       //activity_main.xml에서 id를  가지고 사용
             mWebViewInterface = new WebViewInterface(MainActivity.this, mWebView); //JavascriptInterface 객체화
