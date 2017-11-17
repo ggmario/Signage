@@ -19,7 +19,7 @@ import com.google.firebase.crash.FirebaseCrash;
  * @(#) WifiReceiver.java
  * @since 2017-11-17
  * History	    : [DATE][Programmer][Description]
- * 		        : [2017-11-07][ggmario@eluocnc.com][CREATE: STATEMENT]
+ * 		        : [2017-11-17][ggmario@eluocnc.com][CREATE: STATEMENT]
  */
 
 public class WifiReceiver extends BroadcastReceiver {
